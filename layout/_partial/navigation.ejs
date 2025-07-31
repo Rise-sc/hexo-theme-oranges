@@ -1,3 +1,5 @@
+<% /* ===== 修改：增加判断，只在首页显示头像和昵称 ===== */ %>
+<% if (is_home()) { %>
 <div class="header">
   <div class="avatar">
     <a href="<%- theme.avatar.path %>">
@@ -8,7 +10,9 @@
         <img src="<%- theme.avatar.author_photo %>" alt="">
       <% } %>
     </a>
-    <div class="nickname"><a href="<%- theme.avatar.path %>"><%- theme.avatar.author_nickname %></a></div>
+    <div class="nickname">
+      <a href="<%- theme.avatar.path %>"><%- theme.avatar.author_nickname %></a>
+    </div>
   </div>
   <div class="navbar">
     <ul>
@@ -26,5 +30,25 @@
     </ul>
   </div>
 </div>
+<% } else { %> 
+<% /* ===== 修改：其他页面只显示导航，不显示头像部分 ===== */ %>
+<div class="header">
+  <div class="navbar">
+    <ul>
+      <%
+        for(let item of theme.navbar) {
+          if (item.enable) {
+      %>
+        <li class="nav-item" data-path="<%- item.path %>">
+          <a href="<%- item.path %>"><%- item.name %></a>
+        </li>
+      <%
+          }
+        }
+      %>
+    </ul>
+  </div>
+</div>
+<% } %>
 
 <%- js(['/js/activeNav.js']) %>
