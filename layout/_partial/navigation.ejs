@@ -1,9 +1,8 @@
-<% /* ===== 修改：增加判断，只在首页显示头像和昵称 ===== */ %>
-<% if (is_home()) { %>
+<% /* ===== 修改：只在非文章详情页显示头像和昵称 ===== */ %>
+<% if (!is_post()) { %>
 <div class="header">
   <div class="avatar">
     <a href="<%- theme.avatar.path %>">
-      <!-- 头像取消懒加载，添加no-lazy -->
       <% if (config.lazyload && config.lazyload.enable) { %>
         <img no-lazy src="<%- theme.avatar.author_photo %>" alt="">
       <% } else { %>
@@ -16,36 +15,24 @@
   </div>
   <div class="navbar">
     <ul>
-      <%
-        for(let item of theme.navbar) {
-          if (item.enable) {
-      %>
+      <% for(let item of theme.navbar) { if (item.enable) { %>
         <li class="nav-item" data-path="<%- item.path %>">
           <a href="<%- item.path %>"><%- item.name %></a>
         </li>
-      <%
-          }
-        }
-      %>
+      <% } } %>
     </ul>
   </div>
 </div>
-<% } else { %> 
-<% /* ===== 修改：其他页面只显示导航，不显示头像部分 ===== */ %>
+<% } else { %>
+<% /* ===== 文章详情页只显示导航，不显示头像部分 ===== */ %>
 <div class="header">
   <div class="navbar">
     <ul>
-      <%
-        for(let item of theme.navbar) {
-          if (item.enable) {
-      %>
+      <% for(let item of theme.navbar) { if (item.enable) { %>
         <li class="nav-item" data-path="<%- item.path %>">
           <a href="<%- item.path %>"><%- item.name %></a>
         </li>
-      <%
-          }
-        }
-      %>
+      <% } } %>
     </ul>
   </div>
 </div>
