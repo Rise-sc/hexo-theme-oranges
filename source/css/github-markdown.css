@@ -734,3 +734,49 @@
 .markdown-body hr {
   border-bottom-color: #eee;
 }
+
+
+/* === 全站 Markdown 表格：booktabs 学术风格（任意列数）=== */
+.markdown-body table{
+  display: table !important;            /* 覆盖主题的 display:block */
+  margin: 0 auto 1rem;
+  width: 100%;                          /* 宽度占满容器 */
+  max-width: 960px;                     /* 桌面阅读宽度，可按需调整/删除 */
+  table-layout: fixed;                  /* 列宽自动均分，随列数自适应 */
+  border-collapse: separate !important;
+  border-spacing: 0;
+  border: none !important;
+  font-family: "Times New Roman", STSong, "Noto Serif SC", serif;
+}
+
+.markdown-body thead, .markdown-body tbody { display: table-row-group; }
+.markdown-body tr { display: table-row; }
+
+.markdown-body th,
+.markdown-body td{
+  display: table-cell;
+  padding: 8px 14px !important;         /* 行距别太大，避免看起来“空” */
+  text-align: center;
+  vertical-align: middle;
+  border: none !important;
+  white-space: normal !important;        /* 允许换行 */
+  word-break: break-word;
+  overflow-wrap: anywhere;               /* 英文长词也能断行 */
+}
+
+/* booktabs 三线 */
+.markdown-body table{
+  border-top: 2px solid #222 !important;
+  border-bottom: 2px solid #222 !important;
+}
+.markdown-body thead tr:last-child th{
+  border-bottom: 1.5px solid #222 !important;
+}
+
+/* 去掉主题原本的网格线/隔行底色 */
+.markdown-body table tr:nth-child(2n){
+  background: transparent !important;
+}
+
+/* 重要：删除你之前设置过的 “第一/第二列 50%” 等列宽规则 */
+
