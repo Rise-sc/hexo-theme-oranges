@@ -736,47 +736,138 @@
 }
 
 
-/* === 全站 Markdown 表格：booktabs 学术风格（任意列数）=== */
-.markdown-body table{
-  display: table !important;            /* 覆盖主题的 display:block */
-  margin: 0 auto 1rem;
-  width: 100%;                          /* 宽度占满容器 */
-  max-width: 960px;                     /* 桌面阅读宽度，可按需调整/删除 */
-  table-layout: fixed;                  /* 列宽自动均分，随列数自适应 */
-  border-collapse: separate !important;
-  border-spacing: 0;
+/** === 只针对 Markdown 内容表格，完全避开代码块 === **/
+
+/* 首先重置代码块内的表格样式，确保不被影响 */
+.markdown-body pre table,
+.markdown-body .highlight table,
+.markdown-body .codehilite table,
+.markdown-body code table {
+  display: table !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  margin: 0 !important;
+  width: auto !important;
+  table-layout: auto !important;
   border: none !important;
-  font-family: "Times New Roman", STSong, "Noto Serif SC", serif;
+  font-family: inherit !important;
 }
 
-.markdown-body thead, .markdown-body tbody { display: table-row-group; }
-.markdown-body tr { display: table-row; }
-
-.markdown-body th,
-.markdown-body td{
-  display: table-cell;
-  padding: 8px 14px !important;         /* 行距别太大，避免看起来“空” */
-  text-align: center;
-  vertical-align: middle;
+.markdown-body pre th,
+.markdown-body pre td,
+.markdown-body .highlight th,
+.markdown-body .highlight td,
+.markdown-body .codehilite th,
+.markdown-body .codehilite td,
+.markdown-body code th,
+.markdown-body code td {
+  padding: 0 !important;
   border: none !important;
-  white-space: normal !important;        /* 允许换行 */
-  word-break: break-word;
-  overflow-wrap: anywhere;               /* 英文长词也能断行 */
-}
-
-/* booktabs 三线 */
-.markdown-body table{
-  border-top: 2px solid #222 !important;
-  border-bottom: 2px solid #222 !important;
-}
-.markdown-body thead tr:last-child th{
-  border-bottom: 1.5px solid #222 !important;
-}
-
-/* 去掉主题原本的网格线/隔行底色 */
-.markdown-body table tr:nth-child(2n){
+  text-align: left !important;
   background: transparent !important;
 }
 
-/* 重要：删除你之前设置过的 “第一/第二列 50%” 等列宽规则 */
+/* 然后定义 Markdown 内容表格的学术风格 */
+.markdown-body > table,
+.markdown-body > div > table,
+.markdown-body p + table,
+.markdown-body h1 + table,
+.markdown-body h2 + table,
+.markdown-body h3 + table,
+.markdown-body h4 + table,
+.markdown-body h5 + table,
+.markdown-body h6 + table {
+  display: table !important;
+  margin: 1rem auto !important;
+  width: 100% !important;
+  max-width: 960px !important;
+  table-layout: fixed !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  border: none !important;
+  font-family: "Times New Roman", STSong, "Noto Serif SC", serif !important;
+  
+  /* booktabs 顶部和底部粗线 */
+  border-top: 2px solid #222 !important;
+  border-bottom: 2px solid #222 !important;
+}
+
+.markdown-body > table thead,
+.markdown-body > div > table thead,
+.markdown-body p + table thead,
+.markdown-body h1 + table thead,
+.markdown-body h2 + table thead,
+.markdown-body h3 + table thead,
+.markdown-body h4 + table thead,
+.markdown-body h5 + table thead,
+.markdown-body h6 + table thead {
+  display: table-header-group !important;
+}
+
+.markdown-body > table tbody,
+.markdown-body > div > table tbody,
+.markdown-body p + table tbody,
+.markdown-body h1 + table tbody,
+.markdown-body h2 + table tbody,
+.markdown-body h3 + table tbody,
+.markdown-body h4 + table tbody,
+.markdown-body h5 + table tbody,
+.markdown-body h6 + table tbody {
+  display: table-row-group !important;
+}
+
+.markdown-body > table tr,
+.markdown-body > div > table tr,
+.markdown-body p + table tr,
+.markdown-body h1 + table tr,
+.markdown-body h2 + table tr,
+.markdown-body h3 + table tr,
+.markdown-body h4 + table tr,
+.markdown-body h5 + table tr,
+.markdown-body h6 + table tr {
+  display: table-row !important;
+  background: transparent !important;
+}
+
+.markdown-body > table th,
+.markdown-body > table td,
+.markdown-body > div > table th,
+.markdown-body > div > table td,
+.markdown-body p + table th,
+.markdown-body p + table td,
+.markdown-body h1 + table th,
+.markdown-body h1 + table td,
+.markdown-body h2 + table th,
+.markdown-body h2 + table td,
+.markdown-body h3 + table th,
+.markdown-body h3 + table td,
+.markdown-body h4 + table th,
+.markdown-body h4 + table td,
+.markdown-body h5 + table th,
+.markdown-body h5 + table td,
+.markdown-body h6 + table th,
+.markdown-body h6 + table td {
+  display: table-cell !important;
+  padding: 8px 14px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  border: none !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+  background: transparent !important;
+}
+
+/* booktabs 表头底部中等粗细线 */
+.markdown-body > table thead tr:last-child th,
+.markdown-body > div > table thead tr:last-child th,
+.markdown-body p + table thead tr:last-child th,
+.markdown-body h1 + table thead tr:last-child th,
+.markdown-body h2 + table thead tr:last-child th,
+.markdown-body h3 + table thead tr:last-child th,
+.markdown-body h4 + table thead tr:last-child th,
+.markdown-body h5 + table thead tr:last-child th,
+.markdown-body h6 + table thead tr:last-child th {
+  border-bottom: 1.5px solid #222 !important;
+}
 
