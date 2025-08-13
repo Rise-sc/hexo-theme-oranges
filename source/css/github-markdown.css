@@ -736,8 +736,6 @@
 }
 
 
-/** === 只针对 Markdown 内容表格，完全避开代码块 === **/
-
 /* 首先重置代码块内的表格样式，确保不被影响 */
 .markdown-body pre table,
 .markdown-body .highlight table,
