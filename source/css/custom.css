@@ -1,0 +1,4 @@
+/* 隐藏置顶图标（📌） */
+span.icon-pin-top.post-top {
+  display: none !important;
+}
